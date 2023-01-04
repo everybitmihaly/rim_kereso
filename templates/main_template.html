@@ -32,10 +32,9 @@
     const params = new Proxy(new URLSearchParams(window.location.search), {
       get: (searchParams, prop) => searchParams.get(prop),
     });
-    document.querySelector("#first_input").setAttribute("value", params.first)
-    document.querySelector("#second_input").setAttribute("value", params.second)
-    document.querySelector("#third_input  ").setAttribute("value", params.third)
-    console.log(params)
+    document.querySelector("#first_input").setAttribute("value", params.first === null ? "" : params.first)
+    document.querySelector("#second_input").setAttribute("value", params.second === null ? "" : params.second)
+    document.querySelector("#third_input  ").setAttribute("value", params.third === null ? "" : params.third)
 
     const formInput = document.querySelector(".main_form");
     const formButton = document.querySelector(".form-button");
