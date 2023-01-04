@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rím kereső</title>
+  <style>
+    .form_section {
+        margin: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="form_section">
+  <form class="main_form">
+    <label for="first_input">First</label>
+    <input class="form-input" type="text" id="first_input" name="first"><br>
+    <label for="second_input">Second</label>
+    <input class="form-input" type="text" id="second_input" name="second"><br>
+    <label for="third_input">Third</label>
+    <input class="form-input" type="text" id="third_input" name="third"><br><br>
+    <button class="form-button" type="submit">Submit</button>
+  </form>
+</div>
+  <h1>Keresendő szavak</h1>
+  {% for name, value in data.items() %}
+    {% if value %}
+      <p>{{ name }} - {{ value }}</p>
+    {% endif %}
+  {% endfor %}
+
+  <script>
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+    document.querySelector("#first_input").setAttribute("value", params.first)
+    document.querySelector("#second_input").setAttribute("value", params.second)
+    document.querySelector("#third_input  ").setAttribute("value", params.third)
+    console.log(params)
+
+    const formInput = document.querySelector(".main_form");
+    const formButton = document.querySelector(".form-button");
+
+    // the default state is 'disabled'
+    formButton.disabled = true;
+
+    // alternative is to use "change" - explained below
+    formInput.addEventListener("keyup", buttonState);
+
+    function buttonState() {
+        console.log('workin')
+        if (document.querySelector("#first_input").value === "" && document.querySelector("#second_input").value === ""
+            && document.querySelector("#third_input").value === "") {
+            formButton.disabled = true; // return disabled as true whenever the input field is empty
+        } else {
+            formButton.disabled = false; // enable the button once the input field has content
+        }
+    }
+  </script>
+</body>
+</html>
