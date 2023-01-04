@@ -5,4 +5,4 @@ local run:
 (make sure you have poetry installed)
 
 `poetry install`<br>
-`uvicorn main:app --reload`
+`poetry run uvicorn main:app --reload`
